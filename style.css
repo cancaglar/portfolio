@@ -1,33 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
 :root {
-    --primary-color: #333;
-    --secondary-color: #fff;
-    --accent-color: #007bff;
-    --bg-color: #f4f4f4;
+    --bg-color: #0b0f19;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #3b82f6;
+    --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Outfit', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: var(--bg-color);
-    color: var(--primary-color);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+    background-attachment: fixed;
 }
 
 .hero {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
     text-align: center;
-    padding: 4rem 1rem;
+    padding: 6rem 1rem 4rem;
+    position: relative;
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 4rem;
     margin-bottom: 0.5rem;
+    font-weight: 800;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+}
+
+.hero a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.hero a:hover {
+    color: #60a5fa;
+    text-decoration: underline;
 }
 
 .portfolio {
@@ -38,43 +70,55 @@ body {
 
 .portfolio h2 {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-top: 3rem;
-    border-bottom: 2px solid var(--accent-color);
-    display: inline-block;
-    padding-bottom: 0.5rem;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
+    margin-bottom: 2.5rem;
+    font-weight: 600;
+    position: relative;
+}
+
+.portfolio h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-gradient);
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 .project-grid {
     display: grid;
-    gap: 2rem;
-    margin-top: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
 .project-card {
-    background: var(--secondary-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
     overflow: hidden;
-    transition: transform 0.3s;
+    transition: all 0.4s ease;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.7);
 }
 
 .video-container {
     position: relative;
     cursor: pointer;
     overflow: hidden;
-    height: 200px;
+    height: 220px;
+    background: #000;
 }
 
 .video-preview {
@@ -84,6 +128,13 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0.7;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.video-container:hover .video-preview {
+    opacity: 1;
+    transform: scale(1.05);
 }
 
 .play-button {
@@ -91,44 +142,65 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.6);
-    color: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 64px;
+    height: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
-    transition: background 0.3s;
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .video-container:hover .play-button {
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--accent-gradient);
+    border-color: transparent;
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 .project-card h3 {
-    text-align: center;
-    margin: 1rem 0 0.5rem;
+    text-align: left;
+    margin: 1.5rem 1.5rem 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .project-card p {
-    padding: 0 1rem 1rem;
-    text-align: center;
-    color: #555;
+    padding: 0 1.5rem 1.5rem;
+    text-align: left;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    flex-grow: 1;
+    margin: 0;
 }
 
-.project-card a {
+.project-card > a {
     display: inline-block;
-    margin: 5px;
+    padding: 0.5rem 1rem;
+    margin: 0 0 1.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    align-self: flex-start;
 }
 
-.project-card .project-links {
-    text-align: center;
-    padding-bottom: 1rem;
+.project-card > a:hover {
+    background: var(--accent-gradient);
+    border-color: transparent;
+    color: #fff;
 }
 
 
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -137,51 +209,69 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
 }
 
 .modal-content {
     position: relative;
-    margin: 5% auto;
+    margin: auto;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 90vw;
-    max-height: 90vh;
+    width: 100%;
+    height: 100%;
     padding: 20px;
 }
 
 .close-button {
     color: #fff;
     font-size: 2.5rem;
-    font-weight: bold;
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: 20px;
+    right: 30px;
     cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 1001;
+}
+
+.close-button:hover {
+    color: var(--accent-color);
 }
 
 #modal-video {
     max-width: 90vw;
-    max-height: 90vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    aspect-ratio: 16 / 9; /* İstersen sabit oranda açılmasını sağla */
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    background: #000;
 }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
 @media (max-width: 768px) {
     .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .portfolio h2 {
         font-size: 2rem;
     }
 
     .project-grid {
         grid-template-columns: 1fr;
-    }
-
-    .modal-content {
-        width: 95%;
-        margin-top: 10%;
     }
 }
